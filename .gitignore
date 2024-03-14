@@ -145,3 +145,4 @@ packaged.yaml
 
 # Custom
 _local/
+output/*
