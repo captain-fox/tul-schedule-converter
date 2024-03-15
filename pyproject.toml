@@ -8,10 +8,10 @@ packages = [{include = "converter", from = "src"}]
 
 [tool.poetry.dependencies]
 python = ">=3.12, <3.13"
+pandas = "^2.2.1"
 ics = "^0.7.2"
 
 [tool.poetry.group.dev.dependencies]
-pandas = "^2.2.1"
 pytest = "^8.1.1"
 black = "^24.2.0"
 mypy = "^1.9.0"
