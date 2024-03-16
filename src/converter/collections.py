@@ -1,7 +1,7 @@
-__all__ = ["WEEKDAYS"]
+__all__ = ["WEEKDAYS_PL_IDX"]
 
 
-WEEKDAYS = {
+WEEKDAYS_PL_IDX = {
     "Pn": 1,
     "Wt": 2,
     "Śr": 3,

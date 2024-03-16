@@ -3,7 +3,7 @@ import datetime
 from dateutil import tz
 from ics import Event as IcsEvent
 
-from converter.collections import WEEKDAYS
+from converter.collections import WEEKDAYS_PL_IDX
 from converter.events import Event
 
 
@@ -37,7 +37,7 @@ class EventFactory:
             staff_forenames=event_as_dict["_StaffForenames"].strip(),
             group=event_as_dict["_Group"].strip(),
             description=event_as_dict["_Description"].strip(),
-            weekday=WEEKDAYS[weekday_pl],
+            weekday=WEEKDAYS_PL_IDX[weekday_pl],
             time_begins=datetime.time(hour=int(time_begins_hours), minute=int(time_begins_minutes)),
             time_ends=datetime.time(hour=int(time_ends_hours), minute=int(time_ends_minutes)),
             week_idxs=week_idxs,
