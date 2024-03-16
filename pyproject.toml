@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "converter"
+version = "0.1.0"
+description = ""
+authors = ["Stanislaw Reduta <stanislaw.reduta@gmail.com>"]
+readme = "README.md"
+packages = [{include = "converter", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.12, <3.13"
+pandas = "^2.2.1"
+ics = "^0.7.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1.1"
+black = "^24.2.0"
+mypy = "^1.9.0"
+flake8 = "^7.0.0"
+poetry-plugin-export = "^1.6.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+warn_unused_configs = true
+follow_imports = "silent"
+exclude = ["^tests/$"]
+
+[tool.black]
+line-length = 120
+target-version = ["py312"]
