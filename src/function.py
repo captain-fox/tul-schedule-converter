@@ -11,7 +11,7 @@ def handler(
     data_frame: DataFrame, filter_by: str, filter_by_value: str, semester: Semester, calendar: Optional[Calendar] = None
 ) -> Calendar:
     """
-    Generates custom schedule that matches filter criteria. Calendar is an explicit default parameter
+    Generates custom WEEIiA schedule that matches filter criteria. Calendar is an explicit default parameter
     to allow chaining and passing it to and from other modules that may modify or add events to it.
     :param data_frame: DataFrame
     :param filter_by: str
