@@ -1,10 +1,9 @@
 from ics import Calendar
 from pandas import DataFrame
-from typing import List, Optional
+from typing import Optional
 
-from converter.converter import add_events_to_calendar
-from converter.events import Event
-from converter.factories import EventFactory
+from converter.calendar import add_events_to_calendar
+from converter.parsers import parse_data_frame_to_events
 from converter.semester import Semester
 
 
@@ -26,10 +25,7 @@ def handler(
         calendar = Calendar()
 
     data_frame.fillna("", inplace=True)
-    subset = data_frame.loc[data_frame[filter_by] == filter_by_value]
-
-    events: List[Event] = [
-        EventFactory.create(row.to_dict()) for _, row in subset.iterrows() if row.to_dict()["_Event"] != ""
-    ]
+    subset = data_frame.loc[data_frame[filter_by].eq(filter_by_value) & data_frame["_Event"].notnull()]
+    events = parse_data_frame_to_events(subset)
 
     return add_events_to_calendar(calendar=calendar, events=events, semester=semester)
