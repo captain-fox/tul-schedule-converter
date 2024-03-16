@@ -3,10 +3,10 @@ import datetime
 from typing import List
 
 
-__all__ = ["Event"]
+__all__ = ["EventBlueprint"]
 
 
-class Event:
+class EventBlueprint:
     def __init__(
         self,
         raw_event: dict,

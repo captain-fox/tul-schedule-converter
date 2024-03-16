@@ -1,8 +1,6 @@
 import pytest
 import datetime
 
-from ics import Calendar
-
 from converter.semester import Semester
 from function import handler
 
@@ -54,19 +52,20 @@ def test_generate_isc(schedule_csv_as_dataframe, semester_2024_summer_masters_1,
     Use this test case as field-use example of this tool.
     """
 
+    # replaces "na"s with empty strings for better readability
+    schedule_csv_as_dataframe.fillna("", inplace=True)
+
     # given
-    filter_by_condition = "_Group"
-    group = "1AiSR Aut"
-    output_path = f"{output_directory}/export-{group}-{datetime.datetime.now().isoformat()}.ics"
-    calendar = Calendar()
+    filter_by_column = "_Group"
+    filter_by_value = "1AiSR Aut"
+    output_path = f"{output_directory}/export-{filter_by_value}-{datetime.datetime.now().isoformat()}.ics"
 
     # when
     result = handler(
         data_frame=schedule_csv_as_dataframe,
-        filter_by=filter_by_condition,
-        filter_by_value=group,
+        filter_by=filter_by_column,
+        filter_by_value=filter_by_value,
         semester=semester_2024_summer_masters_1,
-        calendar=calendar,
     )
 
     # then

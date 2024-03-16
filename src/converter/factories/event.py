@@ -3,7 +3,7 @@ import datetime
 from typing import Protocol
 
 from converter.collections import WEEKDAYS_PL_IDX
-from converter.events import Event
+from converter.event_blueprint import EventBlueprint
 
 __all__ = ["BaseEventFactory", "EventFactoryWEEIA"]
 
@@ -11,13 +11,13 @@ __all__ = ["BaseEventFactory", "EventFactoryWEEIA"]
 class BaseEventFactory(Protocol):
 
     @staticmethod
-    def create(event_as_dict: dict) -> Event: ...  # noqa E704
+    def create(event_as_dict: dict) -> EventBlueprint: ...  # noqa E704
 
 
 class EventFactoryWEEIA(BaseEventFactory):
 
     @staticmethod
-    def create(event_as_dict: dict) -> Event:
+    def create(event_as_dict: dict) -> EventBlueprint:
         weekday_pl, time_window, week_idxs_raw = event_as_dict["_Event"].split(" ")
         time_begins, time_ends = time_window.split("-")
         time_begins_hours, time_begins_minutes = time_begins.split(":")
@@ -32,7 +32,7 @@ class EventFactoryWEEIA(BaseEventFactory):
             else:
                 week_idxs.append(i)
 
-        event = Event(
+        event = EventBlueprint(
             raw_event=event_as_dict,
             category=event_as_dict["_EventCat"].strip(),
             module=event_as_dict["_Module"].strip(),

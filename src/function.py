@@ -2,8 +2,8 @@ from ics import Calendar
 from pandas import DataFrame
 from typing import Optional
 
-from converter.calendar import add_events_to_calendar
-from converter.parsers import parse_data_frame_to_events
+from converter.calendar import generate_series_of_events
+from converter.misc import parse_data_frame_to_event_blueprints
 from converter.semester import Semester
 
 
@@ -24,8 +24,10 @@ def handler(
     if not calendar:
         calendar = Calendar()
 
-    data_frame.fillna("", inplace=True)
     subset = data_frame.loc[data_frame[filter_by].eq(filter_by_value) & data_frame["_Event"].notnull()]
-    events = parse_data_frame_to_events(subset)
+    blueprints = parse_data_frame_to_event_blueprints(subset)
 
-    return add_events_to_calendar(calendar=calendar, events=events, semester=semester)
+    for evt in generate_series_of_events(event_blueprints=blueprints, semester=semester):
+        calendar.events.add(evt)
+
+    return calendar
